@@ -9,7 +9,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 const httpServer = http.createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+    }
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -46,6 +51,6 @@ app.use("/", router);
 
 
 
-httpServer.listen(3000, () => {
+httpServer.listen(5000, () => {
     console.log('listening on port 3000');
 })
